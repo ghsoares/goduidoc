@@ -28,6 +28,7 @@ Replace `{platform}` with the platform depending on your target system:
   - `ios` to target iOS systems;
   - `javascript` to target Web;
 
+- Before compiling the actual GDExtension, make sure there isn't any Godot editor with the demo project opened;
 - Now, inside `gdextension` folder, run scons with the target system:  
 ```bash
 $ cd ..
@@ -37,8 +38,7 @@ Replace `{platform}` with the same platform you've used at the previous step.
   
 Feel free to change `-j4` argument, it tells how many threads are used to compile the extension, you can replace with `-j{threads}` with `{threads}` being the number threads used.
 
-- The compiled binaries will be inside `addons/godui/bin/` folder, you can then copy the contents to the `addons/godui/bin/` folder inside your project.
-
+The compiled binaries will be found at `project/addons/godui/bin`, so you can test the changes editing the demo project.
 
 
 

@@ -8,7 +8,7 @@ Feel free to contribute to Godui, it's free and open-source, you can view the so
 
 Before making any changes to Godui's source code, you must fork the Godui's repository into your Github's profile, clone it to your machine and make changes from there.
 
-After making changes to Godui's source code, tested and avaliated as ready to use, you can submit a pull request at [Github repository's pull request](https://github.com/ghsoares/godui/issues) which will be evaluated and merged if possible.
+After making changes to Godui's source code, you can submit a pull request at [Github repository's pull request](https://github.com/ghsoares/godui/issues) which will be evaluated and merged if possible.
 
 ### Issues
 
@@ -22,26 +22,16 @@ Instructions about compiling the GDExtension can be found at "[compiling](contri
 
 ## Documentation
 
-Godui's online documentation uses [Docsify](https://docsify.js.org/) to easily generate html at runtime using markdown, all the relevant files can be found at `web-documentation` folder inside the repository.
+Godui's online documentation uses [Docsify](https://docsify.js.org/) to easily generate html at runtime using markdown, the source code can be found [here](https://github.com/ghsoares/goduidoc).
+
+To install docsify CLI install it with npm: `npm i docsify-cli -g`
 
 ### Class reference
 
-For the Godui's custom classes references, I've made a script that parses the markdown to extract the class's methods and properties information, it can be found at `web-documentationjs/apify.js`, it consists of some HTML tags to describe the class:
+For the Godui's custom classes references, I've made a Node script which transpiles the class .xml reference at `classes/` folder into static markdown, the .xml files follows the same structure from Godot's class reference files.
 
-- `<span class-ref>{class}</span>`: Inserts a link to the Godot's class reference based on `{class}` name, the only exceptions are `void` and Godui's classes (must be inserted at `apify.js:CLASS_REFERENCE` object);
+To transpile the class reference files into documentation markdown, firstly you need to install the npm dependencies: `npm install` inside the repository then run the script with `node gen.js`.
 
-- `<param parse-class-api/>`: Marks a markdown file to parse other class reference tags;
+For new classes added, you must change `gen.js:CLASS_REFERENCE` object with the name of the class and the path inside the documentation.
 
-- `<h3 class-property>{type} {name}</h3>`: Creates the markdown for a property and will be added to `class-methods` tag, optionally you can pass `readonly` inside the tag (`<h3 class-property readonly>`) to only generate the getter of property, and assign a default value to it (`{type} {name} = {value}`);
-
-- `<h3 class-method>{type} {name}({param_type} {param_name})</h3>`: Creates the markdown for a method and will be added to `class-properties` tag, optionally you can pass default arguments (`{param_type} {param_name} = {value}`) and flags (`{type} {name}({param_type} {param_name}) {flag} </h3>` where `{flag}` can be `const` or `static`);
-
-- `<span class-properties>{msg}</span>`: After extracting all the class's properties, it inserts a table containing all the properties and links to then in the same page. `{msg}` is used to display a fallback message when not viewing from Docsify;
-
-- `<span class-methods>{msg}</span>`: After extracting all the class's methods, it inserts a table containing all the methods and links to then in the same page. `{msg}` is used to display a fallback message when not viewing from Docsify;
-
-- `<span class-method-ref>{method}</span>`: Links to the description of a method of this class, or another  class if you provide it's name (`{class_name}:{method}`);
-
-- `<span class-property-ref>{property}</span>`: Links to the description of a property of this class, or another class if you provide it's name (`{class_name}:{property}`).
-
-I suggest to insert class references inside `web-documentationapi/` folder and update `web-documentation_sidebar.md` to include the newly added class reference (inside `API` section).
+To see the changes, start a docsify live server with `docsify serve docs` and go to `localhost:3000` at your web browser.
